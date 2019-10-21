@@ -19,14 +19,55 @@ public class MainFrame extends JFrame {
         this.setBounds(x, y, width, height);
 
         JPanel panel = new JPanel();
-        //this.add(panel);
-        panel.setLayout(new GridLayout(7, 3));
-        //panel.setLayout(new GridBagLayout());
+        //panel.setLayout(new GridLayout(7, 3));
+        panel.setLayout(new GridBagLayout());
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.gridwidth = GridBagConstraints.REMAINDER;
 
-        panel.add(new JLabel(prop.getProperty("main-frame-before-studio-btn-comment")));
-        panel.add(new StudioButton(prop));
-        panel.add(new JLabel(prop.getProperty("main-frame-before-addr-temp-comment")));
-        panel.add(new TemplateAddressPanel(prop));
+        panel.add(new JLabel(prop.getProperty("main-frame-before-studio-btn-comment")), constraints);
+        panel.add(new StudioButton(prop),constraints);
+        panel.add(new JLabel(" "),constraints);
+
+        JPanel panelLeft = new JPanel();
+        JPanel panelRight = new JPanel();
+
+        JPanel panelSubMain = new JPanel();
+        panelSubMain.setLayout(new GridLayout(1,2));
+
+        panelLeft.add(new JLabel(prop.getProperty("main-frame-before-addr-temp-comment")));
+        panelLeft.add(new TemplateAddressPanel(prop));
+        panelRight.add(new JLabel(prop.getProperty("main-frame-before-addr-result-comment")));
+        panelRight.add(new ResultAddressPanel(prop));
+
+        panelSubMain.add(panelLeft);
+        panelSubMain.add(panelRight);
+
+        panel.add(panelSubMain, constraints);
+
+        JPanel panelListMain = new JPanel();
+        panelListMain.setLayout(new GridLayout(1,2));
+
+
+        String[] resultTestList = {"ReportTest1.rpt", "ReportTest2.rpt", "ReportTest3.rpt", "ReportTest4.rpt",
+                                   "ReportTest5.rpt", "ReportTest6.rpt", "ReportTest7.rpt", "ReportTest8.rpt",
+                                   "ReportTest9.rpt", "ReportTest10.rpt", "ReportTest11.rpt", "ReportTest12.rpt"
+                                    };
+        JList listResult  = new JList(resultTestList);
+        listResult.setLayoutOrientation(JList.VERTICAL);
+
+        JScrollPane scrollPaneRes = new JScrollPane();
+        scrollPaneRes.setViewportView(listResult);
+
+        ExecuteButton executeButton = new ExecuteButton(prop);
+
+        panelListMain.add(new TemplatePane(prop, executeButton));
+        panelListMain.add(scrollPaneRes);
+
+        panel.add(panelListMain, constraints);
+
+        panel.add(new JLabel(" "),constraints);
+        panel.add(executeButton,constraints);
 
         this.add(panel);
     }

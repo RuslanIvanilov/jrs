@@ -4,9 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Properties;
 
-public class TemplateAddressPanel extends JPanel {
+public class ResultAddressPanel extends JPanel {
 
-    public TemplateAddressPanel(Properties prop){
+    public ResultAddressPanel(Properties prop){
         super();
         this.setLayout(new GridBagLayout());
 
@@ -19,7 +19,5 @@ public class TemplateAddressPanel extends JPanel {
         this.add(pathButton);
 
     }
-
-
 
 }
