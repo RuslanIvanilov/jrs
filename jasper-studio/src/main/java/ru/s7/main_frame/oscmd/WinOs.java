@@ -8,6 +8,9 @@ import java.util.Properties;
 public class WinOs implements OsCmd {
     @Override
     public void execute(String stringCmd) throws IOException {
-        Runtime.getRuntime().exec(stringCmd);
+
+        String delimiter = ";";
+        String[] execCmd  = stringCmd.split(delimiter);
+        Runtime.getRuntime().exec(execCmd);
     }
 }
