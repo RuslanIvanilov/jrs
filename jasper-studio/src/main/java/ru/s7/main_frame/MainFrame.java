@@ -1,5 +1,7 @@
 package ru.s7.main_frame;
 
+import ru.s7.main_frame.oscmd.ResultPane;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Properties;
@@ -41,6 +43,7 @@ public class MainFrame extends JFrame {
         panelRight.add(new ResultAddressPanel(prop));
 
         panelSubMain.add(panelLeft);
+
         panelSubMain.add(panelRight);
 
         panel.add(panelSubMain, constraints);
@@ -48,21 +51,10 @@ public class MainFrame extends JFrame {
         JPanel panelListMain = new JPanel();
         panelListMain.setLayout(new GridLayout(1,2));
 
-
-        String[] resultTestList = {"ReportTest1.rpt", "ReportTest2.rpt", "ReportTest3.rpt", "ReportTest4.rpt",
-                                   "ReportTest5.rpt", "ReportTest6.rpt", "ReportTest7.rpt", "ReportTest8.rpt",
-                                   "ReportTest9.rpt", "ReportTest10.rpt", "ReportTest11.rpt", "ReportTest12.rpt"
-                                    };
-        JList listResult  = new JList(resultTestList);
-        listResult.setLayoutOrientation(JList.VERTICAL);
-
-        JScrollPane scrollPaneRes = new JScrollPane();
-        scrollPaneRes.setViewportView(listResult);
-
         ExecuteButton executeButton = new ExecuteButton(prop);
 
         panelListMain.add(new TemplatePane(prop, executeButton));
-        panelListMain.add(scrollPaneRes);
+        panelListMain.add(new ResultPane(prop, executeButton));
 
         panel.add(panelListMain, constraints);
 

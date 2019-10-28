@@ -13,7 +13,7 @@ public class ResultAddressPanel extends JPanel {
         JTextField field = new JTextField();
 
         field.setPreferredSize(new Dimension(230, 24));
-        PathButton pathButton = new PathButton(prop, field);
+        PathButton pathButton = new PathButton(prop,"result-address-path", field);
 
         this.add(field);
         this.add(pathButton);

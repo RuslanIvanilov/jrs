@@ -1,6 +1,6 @@
 package ru.s7.main_frame.oscmd;
 
-import ru.s7.main_frame.AppProperty;
+import ru.s7.stuff.AppProperty;
 
 import java.util.Properties;
 

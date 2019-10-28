@@ -1,12 +1,10 @@
-package ru.s7.main_frame;
+package ru.s7.stuff;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
 public class AppProperty extends Properties{
-
-    private Properties prop;
 
     private AppProperty(){
         try(InputStream input = getClass().getClassLoader().getResourceAsStream("app.properties") ){
