@@ -1,26 +1,28 @@
-package ru.s7.main_frame;
+package ru.s7.main_frame.oscmd;
+
+import ru.s7.main_frame.ExecuteButton;
+import ru.s7.main_frame.TemplatePane;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.util.Properties;
 
-public class TemplatePane extends JScrollPane {
-
+public class ResultPane extends JScrollPane {
     private JList listTemplate;
     private ExecuteButton executeButton;
 
-    public TemplatePane(Properties prop, ExecuteButton executeButton){
+    public ResultPane(Properties prop, ExecuteButton executeButton){
 
         this.executeButton = executeButton;
 
-        String[] templTestList = { "Report1.jrxml", "Report2.jrxml", "Report3.jrxml", "Report4.jrxml",
-                "Report5.jrxml", "Report6.jrxml", "Report7.jrxml", "Report8.jrxml",
-                "Report9.jrxml", "Report10.jrxml", "Report11.jrxml", "Report12.jrxml",
-                "Report13.jrxml", "Report14.jrxml", "Report15.jrxml", "Report16.jrxml"
-        };
+        String[] resultTestList = {"ReportTest1.rpt", "ReportTest2.rpt", "ReportTest3.rpt", "ReportTest4.rpt",
+                "ReportTest5.rpt", "ReportTest6.rpt", "ReportTest7.rpt", "ReportTest8.rpt",
+                "ReportTest9.rpt", "ReportTest10.rpt", "ReportTest11.rpt", "ReportTest12.rpt",
+                "ReportTest13.rpt", "ReportTest14.rpt", "ReportTest15.rpt", "ReportTest16.rpt"
+                };
 
-        listTemplate  = new JList(templTestList);
+        listTemplate  = new JList(resultTestList);
         listTemplate.setLayoutOrientation(JList.VERTICAL);
         listTemplate.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -28,8 +30,6 @@ public class TemplatePane extends JScrollPane {
 
         this.setViewportView(listTemplate);
     }
-
-
 
     class ListEventListener implements ListSelectionListener {
         @Override
@@ -40,6 +40,4 @@ public class TemplatePane extends JScrollPane {
             }
         }
     }
-
-
 }

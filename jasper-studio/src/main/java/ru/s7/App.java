@@ -1,6 +1,6 @@
 package ru.s7;
 
-import ru.s7.main_frame.AppProperty;
+import ru.s7.stuff.AppProperty;
 import ru.s7.main_frame.MainFrame;
 
 public class App {
