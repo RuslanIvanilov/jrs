@@ -24,6 +24,7 @@ public class TemplateAddressPanel extends JPanel {
 
         field.setPreferredSize(new Dimension(230, 24));
         field.setText(prop.getProperty(PROP_ADDRESS_PATH).isEmpty()?"":prop.getProperty(PROP_ADDRESS_PATH));
+        if(!field.getText().isEmpty()) new TextFieldEditListener().notifyObserver();
 
         PathButton pathButton = new PathButton(prop, PROP_ADDRESS_PATH, field);
 
@@ -32,11 +33,23 @@ public class TemplateAddressPanel extends JPanel {
 
     }
 
-   class TextFieldEditListener  implements ActionListener{
+   class TextFieldEditListener  implements ActionListener, Notifier{
+
+       private java.util.List observers;
+
        @Override
        public void actionPerformed(ActionEvent actionEvent) {
            prop.setProperty(PROP_ADDRESS_PATH, "");
            AppPropertySaver.save(prop);
+           notifyObserver();
+       }
+
+       @Override
+       public void notifyObserver() {
+           for (int i = 0; i < observers.size() ; i++){
+               EventObserver obs = (EventObserver)observers.get(i);
+               obs.update(Event.TEMPLATE_FILES_LIST );
+           }
        }
    }
 

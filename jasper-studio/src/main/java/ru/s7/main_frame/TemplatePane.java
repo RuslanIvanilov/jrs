@@ -29,6 +29,8 @@ public class TemplatePane extends JScrollPane {
         this.setViewportView(listTemplate);
     }
 
+
+
     class ListEventListener implements ListSelectionListener {
         @Override
         public void valueChanged(ListSelectionEvent e) {
