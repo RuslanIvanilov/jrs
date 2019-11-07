@@ -1,12 +1,15 @@
 package ru.s7.report;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
 public class ReportFileTemplate {
-    String pathJRxmlDir;
-    String templateFileName;
-    String pathReportDir;
+    private String pathJRxmlDir;
+    private String templateFileName;
+    private String pathReportDir;
 
     public ReportFileTemplate(String pathJRxmlDir, String templateFileName, String pathReportDir) {
         this.pathJRxmlDir = pathJRxmlDir;
@@ -14,11 +17,11 @@ public class ReportFileTemplate {
         this.pathReportDir = pathReportDir;
     }
 
-    public String getTemplateJRxmlFilePath() {
+    String getTemplateJRxmlFilePath() {
         return pathJRxmlDir + templateFileName;
     }
 
-    public String getReportDir() {
+    String getReportDir() {
         return pathReportDir;
     }
     /*
@@ -29,11 +32,21 @@ public class ReportFileTemplate {
     }
     */
 
-    public String getFullReportFilePath() {
+    private String getDateSuffix(){
+        SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd-HH-mm");
+        return format.format(Calendar.getInstance().getTime());
+    }
 
-        System.out.println("Calendar: " + Calendar.getInstance().getTime());
+    String getFullReportFilePath() {
 
-        return pathReportDir + templateFileName.replaceAll(".jrxml", "" )+ "_"+ Calendar.getInstance().getTime().toGMTString() + ".pdf";
+        System.out.println( "Calendar: " + getDateSuffix() );
+        System.out.println("pathReportDir [" + pathReportDir + "]");
+        System.out.println("file [" + pathReportDir + templateFileName.replaceAll(".jrxml", "" )+ "_"+ getDateSuffix() + ".pdf" + "]");
+
+        String delim = pathReportDir.indexOf("\\")>-1?"\\":"/";
+        String lastDirPathSymbol = pathReportDir.substring(pathReportDir.length()-1).contains(delim)?"":delim;
+
+        return pathReportDir + lastDirPathSymbol + templateFileName.replaceAll(".jrxml", "" )+ "_"+ getDateSuffix() + ".pdf";
 
     }
 

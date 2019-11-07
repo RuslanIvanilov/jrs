@@ -8,6 +8,7 @@ public class MainFrame extends JFrame {
 
     public MainFrame(Properties prop) {
 
+        this.setIconImage( new ImageIcon(prop.getProperty("main-frame-icon-logo-path")).getImage() );
         this.setTitle(prop.getProperty("main-frame-title"));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -19,15 +20,17 @@ public class MainFrame extends JFrame {
         this.setBounds(x, y, width, height);
 
         JPanel panel = new JPanel();
-        //panel.setLayout(new GridLayout(7, 3));
         panel.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.gridwidth = GridBagConstraints.REMAINDER;
 
+        setLogo(prop, panel, constraints);
+
         panel.add(new JLabel(prop.getProperty("main-frame-before-studio-btn-comment")), constraints);
         panel.add(new StudioButton(prop),constraints);
-        panel.add(new JLabel(" "),constraints);
+
+        panel.add(new JLabel(" ") ,constraints);
 
         JPanel panelLeft = new JPanel();
         JPanel panelRight = new JPanel();
@@ -60,6 +63,14 @@ public class MainFrame extends JFrame {
         panel.add(executeButton,constraints);
 
         this.add(panel);
+    }
+
+    private void setLogo(Properties prop, JPanel mainPanel, GridBagConstraints constraints){
+        ImageIcon icon = new ImageIcon(prop.getProperty("main-frame-logo-path"));
+        JLabel logo = new JLabel();
+        logo.setIcon(icon);
+        mainPanel.add( logo , constraints);
+        mainPanel.add(new JLabel(" "), constraints);
     }
 
 }

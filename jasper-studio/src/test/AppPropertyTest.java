@@ -14,6 +14,7 @@ public class AppPropertyTest {
         assertTrue( !url.getPath().isEmpty() );
     }
 
+    /*
     @Test
     public void shouldGetJRXMLfileList(){
 
@@ -27,5 +28,6 @@ public class AppPropertyTest {
 
 
     }
+    */
 
 }
