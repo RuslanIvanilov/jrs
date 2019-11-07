@@ -1,7 +1,5 @@
 package ru.s7.main_frame;
 
-import ru.s7.main_frame.oscmd.ResultPane;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.Properties;

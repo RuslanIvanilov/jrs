@@ -1,6 +1,7 @@
 package ru.s7.main_frame;
 
 import ru.s7.stuff.AppPropertySaver;
+import ru.s7.stuff.FileReport;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,33 +25,23 @@ public class TemplateAddressPanel extends JPanel {
 
         field.setPreferredSize(new Dimension(230, 24));
         field.setText(prop.getProperty(PROP_ADDRESS_PATH).isEmpty()?"":prop.getProperty(PROP_ADDRESS_PATH));
-        if(!field.getText().isEmpty()) new TextFieldEditListener().notifyObserver();
 
-        PathButton pathButton = new PathButton(prop, PROP_ADDRESS_PATH, field);
+        PathButton pathButton = new PathButton(prop, PROP_ADDRESS_PATH, field, new FileReport("JRXML File", "jrxml") );
 
         this.add(field);
         this.add(pathButton);
 
     }
 
-   class TextFieldEditListener  implements ActionListener, Notifier{
-
-       private java.util.List observers;
-
+   class TextFieldEditListener  implements ActionListener{
        @Override
        public void actionPerformed(ActionEvent actionEvent) {
            prop.setProperty(PROP_ADDRESS_PATH, "");
            AppPropertySaver.save(prop);
-           notifyObserver();
+
        }
 
-       @Override
-       public void notifyObserver() {
-           for (int i = 0; i < observers.size() ; i++){
-               EventObserver obs = (EventObserver)observers.get(i);
-               obs.update(Event.TEMPLATE_FILES_LIST );
-           }
-       }
+
    }
 
 

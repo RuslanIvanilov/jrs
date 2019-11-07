@@ -10,23 +10,10 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
-			<staticText>
-				<reportElement x="167" y="19" width="263" height="30" uuid="5fa7c323-d24e-4f19-a009-58a44a234b20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="16"/>
-				</textElement>
-				<text><![CDATA[TEST for create PDF records]]></text>
-			</staticText>
-		</band>
+		<band height="79" splitType="Stretch"/>
 	</title>
 	<pageHeader>
-		<band height="41" splitType="Stretch">
-			<staticText>
-				<reportElement x="100" y="0" width="360" height="30" uuid="8dd32900-6e3d-437a-bdbb-ff460fb1b39f"/>
-				<text><![CDATA[Text for PAGE HEADER]]></text>
-			</staticText>
-		</band>
+		<band height="35" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
 		<band height="61" splitType="Stretch"/>
@@ -44,4 +31,3 @@
 		<band height="42" splitType="Stretch"/>
 	</summary>
 </jasperReport>
-

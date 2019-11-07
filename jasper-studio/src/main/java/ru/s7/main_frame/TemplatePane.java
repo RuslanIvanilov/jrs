@@ -1,5 +1,7 @@
 package ru.s7.main_frame;
 
+import ru.s7.stuff.PathUtils;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -9,26 +11,33 @@ public class TemplatePane extends JScrollPane {
 
     private JList listTemplate;
     private ExecuteButton executeButton;
+    private Properties prop;
 
     public TemplatePane(Properties prop, ExecuteButton executeButton){
-
+        this.prop = prop;
         this.executeButton = executeButton;
+        fillFileList();
+    }
 
-        String[] templTestList = { "Report1.jrxml", "Report2.jrxml", "Report3.jrxml", "Report4.jrxml",
-                "Report5.jrxml", "Report6.jrxml", "Report7.jrxml", "Report8.jrxml",
-                "Report9.jrxml", "Report10.jrxml", "Report11.jrxml", "Report12.jrxml",
-                "Report13.jrxml", "Report14.jrxml", "Report15.jrxml", "Report16.jrxml"
-        };
-
-        listTemplate  = new JList(templTestList);
+    public void fillFileList()
+    {
+        String[] files = getFiles();
+        listTemplate  = files != null ? new JList( files ): new JList();
         listTemplate.setLayoutOrientation(JList.VERTICAL);
         listTemplate.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
         listTemplate.addListSelectionListener(new ListEventListener());
-
         this.setViewportView(listTemplate);
     }
 
+
+    private String[] getFiles(){
+        if( !prop.getProperty("template-address-path").isEmpty() ){
+            String[] files = new PathUtils().getFiles(prop.getProperty("template-address-path"), ".jrxml" );
+            return files;
+        } else{
+            return null;
+        }
+    }
 
 
     class ListEventListener implements ListSelectionListener {
@@ -40,6 +49,8 @@ public class TemplatePane extends JScrollPane {
             }
         }
     }
+
+
 
 
 }
