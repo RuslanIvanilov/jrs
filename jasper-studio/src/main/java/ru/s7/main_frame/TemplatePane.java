@@ -7,7 +7,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.util.Properties;
 
-public class TemplatePane extends JScrollPane {
+public class TemplatePane extends JScrollPane implements Subscriber{
 
     private JList listTemplate;
     private ExecuteButton executeButton;
@@ -21,6 +21,7 @@ public class TemplatePane extends JScrollPane {
 
     public void fillFileList()
     {
+        //this.repaint();
         String[] files = getFiles();
         listTemplate  = files != null ? new JList( files ): new JList();
         listTemplate.setLayoutOrientation(JList.VERTICAL);
@@ -36,6 +37,13 @@ public class TemplatePane extends JScrollPane {
             return files;
         } else{
             return null;
+        }
+    }
+
+    @Override
+    public void event(EventType eventType) {
+        if(EventType.SUCCESS == eventType){
+            fillFileList();
         }
     }
 

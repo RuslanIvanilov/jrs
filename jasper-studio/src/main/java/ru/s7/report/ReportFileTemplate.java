@@ -18,19 +18,19 @@ public class ReportFileTemplate {
     }
 
     String getTemplateJRxmlFilePath() {
-        return pathJRxmlDir + templateFileName;
+        return getFullDirPath(pathJRxmlDir) + templateFileName;
     }
 
     String getReportDir() {
         return pathReportDir;
     }
-    /*
-    private String getDateSuffix(){
-        Calendar cal = new Calendar() {
-        }
-        return
+
+    private String getFullDirPath(String pathDir){
+        String delim = pathDir.indexOf("\\")>-1?"\\":"/";
+        String lastDirPathSymbol = pathDir.substring(pathDir.length()-1).contains(delim)?"":delim;
+        return pathDir + lastDirPathSymbol;
     }
-    */
+
 
     private String getDateSuffix(){
         SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd-HH-mm");
@@ -38,15 +38,7 @@ public class ReportFileTemplate {
     }
 
     String getFullReportFilePath() {
-
-        System.out.println( "Calendar: " + getDateSuffix() );
-        System.out.println("pathReportDir [" + pathReportDir + "]");
-        System.out.println("file [" + pathReportDir + templateFileName.replaceAll(".jrxml", "" )+ "_"+ getDateSuffix() + ".pdf" + "]");
-
-        String delim = pathReportDir.indexOf("\\")>-1?"\\":"/";
-        String lastDirPathSymbol = pathReportDir.substring(pathReportDir.length()-1).contains(delim)?"":delim;
-
-        return pathReportDir + lastDirPathSymbol + templateFileName.replaceAll(".jrxml", "" )+ "_"+ getDateSuffix() + ".pdf";
+        return getFullDirPath(pathReportDir ) + templateFileName.replaceAll(".jrxml", "" )+ "_"+ getDateSuffix() + ".pdf";
 
     }
 

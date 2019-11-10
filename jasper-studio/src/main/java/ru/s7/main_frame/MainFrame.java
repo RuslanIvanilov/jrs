@@ -1,13 +1,17 @@
 package ru.s7.main_frame;
 
+import ru.s7.main_frame.oscmd.MainPanel;
 import javax.swing.*;
-import java.awt.*;
 import java.util.Properties;
 
 public class MainFrame extends JFrame {
 
     public MainFrame(Properties prop) {
+        init(prop);
+        this.add(new MainPanel(prop));
+    }
 
+    private void init(Properties prop){
         this.setIconImage( new ImageIcon(prop.getProperty("main-frame-icon-logo-path")).getImage() );
         this.setTitle(prop.getProperty("main-frame-title"));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -18,59 +22,6 @@ public class MainFrame extends JFrame {
         int height = Integer.decode(prop.getProperty("main-frame-height"));
 
         this.setBounds(x, y, width, height);
-
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridBagLayout());
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.gridwidth = GridBagConstraints.REMAINDER;
-
-        setLogo(prop, panel, constraints);
-
-        panel.add(new JLabel(prop.getProperty("main-frame-before-studio-btn-comment")), constraints);
-        panel.add(new StudioButton(prop),constraints);
-
-        panel.add(new JLabel(" ") ,constraints);
-
-        JPanel panelLeft = new JPanel();
-        JPanel panelRight = new JPanel();
-
-        JPanel panelSubMain = new JPanel();
-        panelSubMain.setLayout(new GridLayout(1,2));
-
-        panelLeft.add(new JLabel(prop.getProperty("main-frame-before-addr-temp-comment")));
-        panelLeft.add(new TemplateAddressPanel(prop));
-        panelRight.add(new JLabel(prop.getProperty("main-frame-before-addr-result-comment")));
-        panelRight.add(new ResultAddressPanel(prop));
-
-        panelSubMain.add(panelLeft);
-
-        panelSubMain.add(panelRight);
-
-        panel.add(panelSubMain, constraints);
-
-        JPanel panelListMain = new JPanel();
-        panelListMain.setLayout(new GridLayout(1,2));
-
-        ExecuteButton executeButton = new ExecuteButton(prop);
-
-        panelListMain.add(new TemplatePane(prop, executeButton));
-        panelListMain.add(new ResultPane(prop, executeButton));
-
-        panel.add(panelListMain, constraints);
-
-        panel.add(new JLabel(" "),constraints);
-        panel.add(executeButton,constraints);
-
-        this.add(panel);
-    }
-
-    private void setLogo(Properties prop, JPanel mainPanel, GridBagConstraints constraints){
-        ImageIcon icon = new ImageIcon(prop.getProperty("main-frame-logo-path"));
-        JLabel logo = new JLabel();
-        logo.setIcon(icon);
-        mainPanel.add( logo , constraints);
-        mainPanel.add(new JLabel(" "), constraints);
     }
 
 }

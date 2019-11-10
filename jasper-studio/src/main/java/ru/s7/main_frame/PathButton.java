@@ -17,8 +17,9 @@ public class PathButton extends JButton
     private Properties prop;
     private String propKey;
     private FileReport fileReport;
+    private ConcreteObserver observer;
 
-    public PathButton(Properties prop, String propKey, JTextField path, FileReport fileReport)
+    public PathButton(Properties prop, String propKey, JTextField path, FileReport fileReport, ConcreteObserver observer)
     {
         this.prop = prop;
         this.path = path;
@@ -27,17 +28,16 @@ public class PathButton extends JButton
         this.setText(prop.getProperty("path-button-text"));
         this.setPreferredSize(new Dimension(24, 24));
         this.addActionListener(new ButtonEventListener());
+        this.observer = observer;
 
     }
 
-    class ButtonEventListener implements ActionListener {
+    class ButtonEven tListener implements ActionListener {
         public void actionPerformed(ActionEvent e)
         {
             JFileChooser fileopen = new JFileChooser();
             //fileopen.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-            fileopen.setFileFilter(new FileNameExtensionFilter(fileReport.getDescription(), fileReport.getExtencion()));
-            fileopen.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES );
-
+            fileopen.setFileFilter(new FileNameExtensionFilter(fileReport.getDescrip 
             int ret = fileopen.showDialog(null, "Открыть файл");
 
             //System.out.println("Path without file.jrxml : " + fileopen.getSelectedFile().isFile() + " : " + fileopen.getSelectedFile().getName());
@@ -50,6 +50,8 @@ public class PathButton extends JButton
                 System.out.println("Path text for save ["+path.getText()+"]");
                 prop.setProperty(propKey,path.getText());
                 AppPropertySaver.save(prop);
+                observer.notice(EventType.SUCCESS);
+
             } /*else {
                 path.setText("");
             }*/

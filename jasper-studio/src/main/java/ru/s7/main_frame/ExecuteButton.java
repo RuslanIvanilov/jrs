@@ -15,6 +15,7 @@ public class ExecuteButton extends JButton {
     private String selectedReportName;
     private ExecuteButton executeButton;
     private Properties prop;
+    private ConcreteObserver observer;
 
     public void setSelectedReportName(String selectedReportName){
         this.selectedReportName = selectedReportName;
@@ -24,7 +25,7 @@ public class ExecuteButton extends JButton {
         this.setEnabled(visible);
     }
 
-    public ExecuteButton(Properties prop)
+    public ExecuteButton(Properties prop, ConcreteObserver observer)
     {
         this.prop = prop;
         executeButton = this;
@@ -32,6 +33,7 @@ public class ExecuteButton extends JButton {
         this.setText(prop.getProperty("execute-button-text"));
         this.setPreferredSize(new Dimension(50, 24));
         this.addActionListener(new ButtonEventListener());
+        this.observer = observer;
     }
 
     class ButtonEventListener implements ActionListener {
@@ -43,6 +45,7 @@ public class ExecuteButton extends JButton {
             try {
                 ReportFileTemplate reportFileTemplate = new ReportFileTemplate(prop.getProperty("template-address-path"), selectedReportName,prop.getProperty("result-address-path"));
                 new ru.s7.report.ReportCreator(reportFileTemplate);
+                observer.notice(EventType.SUCCESS);
             } catch (JRException | IOException ex) {
                 ex.printStackTrace();
             }

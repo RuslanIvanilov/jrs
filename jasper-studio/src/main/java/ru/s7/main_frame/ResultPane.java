@@ -9,7 +9,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.util.Properties;
 
-public class ResultPane extends JScrollPane {
+public class ResultPane extends JScrollPane implements Subscriber{
     private JList listResult;
     private ExecuteButton executeButton;
     private Properties prop;
@@ -36,6 +36,13 @@ public class ResultPane extends JScrollPane {
             return files;
         } else{
             return null;
+        }
+    }
+
+    @Override
+    public void event(EventType eventType) {
+        if(EventType.SUCCESS == eventType){
+            fillFileList();
         }
     }
 

@@ -13,10 +13,12 @@ public class ResultAddressPanel extends JPanel {
 
     private final String PROP_ADDRESS_PATH = "result-address-path";
     private Properties prop;
+    private ConcreteObserver observer;
 
     public ResultAddressPanel(Properties prop){
         super();
         this.setLayout(new GridBagLayout());
+        this.prop = prop;
 
         JTextField field = new JTextField();
 
@@ -25,7 +27,7 @@ public class ResultAddressPanel extends JPanel {
         field.addActionListener(new TextFieldEditListener());
         field.setText(prop.getProperty(PROP_ADDRESS_PATH).isEmpty()?"":prop.getProperty(PROP_ADDRESS_PATH));
 
-        PathButton pathButton = new PathButton(prop,"result-address-path", field, new FileReport(" PDF file", "pdf"));
+        PathButton pathButton = new PathButton(prop,"result-address-path", field, new FileReport(" PDF file", "pdf"), observer);
 
         this.add(field);
         this.add(pathButton);
